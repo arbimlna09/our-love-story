@@ -25,11 +25,11 @@ if (!sessionStorage.getItem('isUnlocked')) {
       .key.del { font-size: 20px; font-weight: 500; border: none; background: transparent; letter-spacing: 1px;}
       
       #giftScreen { display: none; text-align: center; animation: fadeIn 1s forwards; }
-      .gift-box { cursor: pointer; animation: bounce 2s infinite; margin: 40px; transition: 0.3s; filter: drop-shadow(0 0 20px rgba(255,255,255,0.2)); }
+      .gift-box { cursor: pointer; animation: bounce 2s infinite; margin: 40px; transition: 0.3s; filter: drop-shadow(0 0 20px rgba(255,255,255,0.3)); font-size: 130px; }
       .gift-box:hover { transform: scale(1.1) rotate(5deg); }
       
       #bouquetScreen { display: none; text-align: center; animation: fadeIn 1s forwards; }
-      .bouquet { margin: 30px; animation: popUp 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); filter: drop-shadow(0 0 30px rgba(255,105,180,0.4)); }
+      .bouquet { margin: 30px; font-size: 180px; animation: popUp 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); filter: drop-shadow(0 0 30px rgba(255,105,180,0.5)); }
       .enter-btn { margin-top: 30px; padding: 15px 40px; border-radius: 40px; border: none; 
                    background: linear-gradient(135deg, #ff4d4d, #ff758c); color: white; font-size: 20px; font-family: 'Dancing Script', cursive; cursor: pointer; 
                    transition: 0.3s; box-shadow: 0 10px 30px rgba(255, 77, 77, 0.4); }
@@ -64,14 +64,14 @@ if (!sessionStorage.getItem('isUnlocked')) {
     <div id="giftScreen">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 45px; color: #ffb3b3;">PIN Benar! ??</h2>
       <p style="font-size: 18px; color: #eee; margin-top: 10px;">Ada hadiah kecil buat kamu...</p>
-      <div class="gift-box" id="giftBox"><img src="assets/gift.png" alt="Gift" style="width: 220px; height: auto;"></div>
+      <div class="gift-box" id="giftBox">??</div>
       <p style="color: #aaa; font-size: 14px; margin-top: -10px;">(Tap kadonya)</p>
     </div>
 
     <!-- Bouquet Screen -->
     <div id="bouquetScreen">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 48px; color: #ff758c;">Virtual Bouquet For You ??</h2>
-      <div class="bouquet"><img src="assets/bouquet.png" alt="Bouquet" style="width: 300px; height: auto; animation: float 3s ease-in-out infinite;"></div>
+      <div class="bouquet">??</div>
       <p style="font-size: 18px; color: #fff; max-width: 80%; line-height: 1.6; margin: 15px auto;">Bunga virtual ini ngga akan pernah layu, sama kayak sayang aku ke kamu. Selamat Anniversary ya, cintaku! ??</p>
       <button class="enter-btn" id="enterBtn">Buka Website</button>
     </div>
