@@ -1,41 +1,146 @@
-// PIN Security
+// PIN Security & Virtual Gift
 if (!sessionStorage.getItem('isUnlocked')) {
   document.documentElement.style.overflow = 'hidden';
   const overlay = document.createElement('div');
   overlay.id = 'pinOverlay';
-  overlay.style.cssText = `
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: #0f1115; z-index: 999999; display: flex;
-    flex-direction: column; justify-content: center; align-items: center;
-    color: white; font-family: 'Poppins', sans-serif;
-  `;
   overlay.innerHTML = `
-    <h2 style="margin-bottom: 20px; font-family: 'Cormorant Garamond', serif; font-size: 32px; letter-spacing: 1px;">Our Love Story ✨</h2>
-    <p style="margin-bottom: 20px; color: #a9a9a9; font-size: 14px;">Masukkan PIN (Hari Jadian Kita)</p>
-    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-      <input type="password" id="pinInput" maxlength="4" placeholder="••••" style="width: 140px; height: 50px; text-align: center; font-size: 28px; border-radius: 12px; border: 2px solid #333; background: #1a1c23; color: white; outline: none; letter-spacing: 15px; padding-left: 15px;">
+    <style>
+      #pinOverlay {
+        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(15, 17, 21, 0.98); backdrop-filter: blur(15px);
+        z-index: 999999; display: flex; flex-direction: column;
+        justify-content: center; align-items: center; color: white;
+        font-family: 'Poppins', sans-serif;
+      }
+      .pin-dots { display: flex; gap: 25px; margin: 30px 0 60px; }
+      .dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid white; transition: 0.2s ease; }
+      .dot.filled { background: white; transform: scale(1.2); }
+      .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px 30px; }
+      .key { width: 80px; height: 80px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); 
+             background: rgba(255,255,255,0.03); color: white; font-size: 36px; font-weight: 300;
+             display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.1s;
+             user-select: none; }
+      .key:active { background: rgba(255,255,255,0.2); transform: scale(0.9); }
+      .key.empty { border: none; background: transparent; cursor: default; }
+      .key.del { font-size: 20px; font-weight: 500; border: none; background: transparent; letter-spacing: 1px;}
+      
+      #giftScreen { display: none; text-align: center; animation: fadeIn 1s forwards; }
+      .gift-box { font-size: 130px; cursor: pointer; animation: bounce 2s infinite; margin: 40px; transition: 0.3s; filter: drop-shadow(0 0 20px rgba(255,255,255,0.3)); }
+      .gift-box:hover { transform: scale(1.15) rotate(5deg); }
+      
+      #bouquetScreen { display: none; text-align: center; animation: fadeIn 1s forwards; }
+      .bouquet { font-size: 180px; margin: 30px; animation: popUp 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); filter: drop-shadow(0 0 30px rgba(255,105,180,0.5)); }
+      .enter-btn { margin-top: 40px; padding: 18px 50px; border-radius: 40px; border: none; 
+                   background: linear-gradient(135deg, #ff4d4d, #ff758c); color: white; font-size: 22px; font-family: 'Dancing Script', cursive; cursor: pointer; 
+                   transition: 0.3s; box-shadow: 0 10px 30px rgba(255, 77, 77, 0.4); }
+      .enter-btn:hover { transform: scale(1.05) translateY(-3px); box-shadow: 0 15px 40px rgba(255, 77, 77, 0.6); }
+
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-30px);} 60% {transform: translateY(-15px);} }
+      @keyframes popUp { from { transform: scale(0) rotate(-20deg) translateY(50px); opacity: 0; } to { transform: scale(1) rotate(0) translateY(0); opacity: 1; } }
+      @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-15px);} 75% {transform: translateX(15px);} }
+    </style>
+
+    <!-- PIN Screen -->
+    <div id="pinScreen" style="display:flex; flex-direction:column; align-items:center;">
+      <p style="font-size: 16px; letter-spacing: 2px; color: #aaa; margin-top: 20px;">Masukkan PIN</p>
+      <h2 style="font-family: 'Dancing Script', cursive; font-size: 38px; margin-top: 5px;">Our Love Story ?</h2>
+      
+      <div class="pin-dots">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+      <p id="pinMsg" style="color: #ff4d4d; font-size: 15px; opacity: 0; margin-top: -30px; margin-bottom: 30px; transition: 0.3s;">PIN salah. Ingat hari jadian kita ya sayang ??</p>
+
+      <div class="keypad">
+        <div class="key">1</div><div class="key">2</div><div class="key">3</div>
+        <div class="key">4</div><div class="key">5</div><div class="key">6</div>
+        <div class="key">7</div><div class="key">8</div><div class="key">9</div>
+        <div class="key empty"></div><div class="key">0</div><div class="key del">DEL</div>
+      </div>
     </div>
-    <p id="pinError" style="color: #ff4d4d; font-size: 14px; opacity: 0; transition: opacity 0.3s;">PIN salah. Coba lagi ya sayang ❤️</p>
+
+    <!-- Gift Screen -->
+    <div id="giftScreen">
+      <h2 style="font-family: 'Dancing Script', cursive; font-size: 45px; color: #ffb3b3;">PIN Benar! ??</h2>
+      <p style="font-size: 18px; color: #eee; margin-top: 10px;">Ada hadiah kecil buat kamu...</p>
+      <div class="gift-box" id="giftBox">??</div>
+      <p style="color: #aaa; font-size: 14px; margin-top: -10px;">(Tap kadonya)</p>
+    </div>
+
+    <!-- Bouquet Screen -->
+    <div id="bouquetScreen">
+      <h2 style="font-family: 'Dancing Script', cursive; font-size: 48px; color: #ff758c;">Virtual Bouquet For You ??</h2>
+      <div class="bouquet">??</div>
+      <p style="font-size: 18px; color: #fff; max-width: 80%; line-height: 1.6; margin: 0 auto;">Bunga virtual ini ngga akan pernah layu, sama kayak sayang aku ke kamu. Selamat Anniversary ya, cintaku! ??</p>
+      <button class="enter-btn" id="enterBtn">Buka Website</button>
+    </div>
   `;
   document.documentElement.appendChild(overlay);
 
-  const pinInput = document.getElementById('pinInput');
-  pinInput.focus();
-  pinInput.addEventListener('input', (e) => {
-    if (pinInput.value === '0711') {
-      sessionStorage.setItem('isUnlocked', 'true');
-      overlay.style.opacity = '0';
-      overlay.style.transition = 'opacity 0.5s ease';
-      setTimeout(() => {
-        overlay.remove();
-        document.documentElement.style.overflow = 'auto';
-      }, 500);
-    } else if (pinInput.value.length === 4) {
-      document.getElementById('pinError').style.opacity = '1';
-      setTimeout(() => { pinInput.value = ''; }, 600);
-    } else {
-      document.getElementById('pinError').style.opacity = '0';
-    }
+  // Logic
+  let enteredPin = "";
+  const correctPin = "0711";
+  const dots = document.querySelectorAll('.dot');
+  const msg = document.getElementById('pinMsg');
+  const pinScreen = document.getElementById('pinScreen');
+  const giftScreen = document.getElementById('giftScreen');
+  const bouquetScreen = document.getElementById('bouquetScreen');
+  
+  function updateDots() {
+    dots.forEach((dot, index) => {
+      if (index < enteredPin.length) dot.classList.add('filled');
+      else dot.classList.remove('filled');
+    });
+  }
+
+  document.querySelectorAll('.key').forEach(key => {
+    key.addEventListener('click', () => {
+      if (key.classList.contains('empty')) return;
+      
+      if (key.classList.contains('del')) {
+        enteredPin = enteredPin.slice(0, -1);
+      } else {
+        if (enteredPin.length < 4) {
+          enteredPin += key.innerText;
+        }
+      }
+      updateDots();
+      msg.style.opacity = '0';
+
+      if (enteredPin.length === 4) {
+        if (enteredPin === correctPin) {
+          // Success
+          setTimeout(() => {
+            pinScreen.style.display = 'none';
+            giftScreen.style.display = 'block';
+          }, 400);
+        } else {
+          // Failed
+          msg.style.opacity = '1';
+          pinScreen.style.animation = 'shake 0.4s';
+          setTimeout(() => {
+            pinScreen.style.animation = '';
+            enteredPin = "";
+            updateDots();
+          }, 500);
+        }
+      }
+    });
+  });
+
+  document.getElementById('giftBox').addEventListener('click', () => {
+    giftScreen.style.display = 'none';
+    bouquetScreen.style.display = 'block';
+  });
+
+  document.getElementById('enterBtn').addEventListener('click', () => {
+    sessionStorage.setItem('isUnlocked', 'true');
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity 0.8s ease';
+    setTimeout(() => {
+      overlay.remove();
+      document.documentElement.style.overflow = 'auto';
+    }, 800);
   });
 }
 
