@@ -1365,3 +1365,74 @@ footer,
     transition-duration: 0.001ms !important;
   }
 }
+
+
+/* --- PREMIUM ENVELOPE UPGRADES --- */
+.envelope {
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
+}
+.envelope:hover {
+  transform: translateY(-10px);
+}
+.env-body {
+  background: repeating-linear-gradient(45deg, #ffcce6, #ffcce6 10px, #ffffff 10px, #ffffff 20px) !important;
+  box-shadow: 0 15px 40px rgba(255, 105, 180, 0.2), inset 0 0 50px rgba(255, 105, 180, 0.4) !important;
+  border: 2px solid #ffb3d9;
+  flex-direction: column;
+  justify-content: center;
+}
+.flap {
+  background: #ffb3d9 !important;
+  border-bottom: 2px solid #ff99cc;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+.wax-seal {
+  position: absolute;
+  top: 140px; /* Aligned with flap edge */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle at 30% 30%, #e74c3c, #c0392b);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  box-shadow: 0 5px 15px rgba(192, 57, 43, 0.5), inset 0 0 10px rgba(0,0,0,0.3);
+  z-index: 20;
+  transition: 0.7s ease;
+}
+.envelope.open .wax-seal {
+  transform: translateX(-50%) translateY(-140px) scale(0);
+  opacity: 0;
+}
+.stamp {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  width: 40px;
+  height: 50px;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Heart_symbol_red.svg/1024px-Heart_symbol_red.svg.png') center/50% no-repeat, white;
+  border: 2px dashed #ffb3b3;
+  padding: 5px;
+}
+.letter-paper {
+  background: #fffaf5 url('https://www.transparenttextures.com/patterns/cream-paper.png') !important;
+  border: 1px solid #e6d3c1;
+  box-shadow: 5px 10px 40px rgba(0,0,0,0.08) !important;
+  position: relative;
+}
+.letter-paper::before {
+  content: "??";
+  position: absolute;
+  bottom: 20px;
+  right: 25px;
+  font-size: 40px;
+  opacity: 0.15;
+  transform: rotate(-15deg);
+}
