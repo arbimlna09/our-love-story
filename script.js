@@ -3,7 +3,7 @@ if (!sessionStorage.getItem('isUnlocked')) {
   document.documentElement.style.overflow = 'hidden';
   const overlay = document.createElement('div');
   overlay.id = 'pinOverlay';
-  overlay.innerHTML = \`
+  overlay.innerHTML = `
     <style>
       #pinOverlay {
         position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -75,7 +75,7 @@ if (!sessionStorage.getItem('isUnlocked')) {
       <p style="font-size: 18px; color: #fff; max-width: 80%; line-height: 1.6; margin: 15px auto;">Bunga virtual ini ngga akan pernah layu, sama kayak sayang aku ke kamu. Selamat Anniversary ya, cintaku! ??</p>
       <button class="enter-btn" id="enterBtn">Buka Website</button>
     </div>
-  \`;
+  `;
   document.documentElement.appendChild(overlay);
 
   // Logic
@@ -188,8 +188,8 @@ const $$ = (selector) => document.querySelectorAll(selector);
 const glow = $('.cursor-glow');
 document.addEventListener('mousemove', (event) => {
   if (!glow) return;
-  glow.style.left = \`${event.clientX}px\`;
-  glow.style.top = \`${event.clientY}px\`;
+  glow.style.left = `${event.clientX}px`;
+  glow.style.top = `${event.clientY}px`;
 });
 
 const musicBtn = $('#musicBtn');
@@ -273,12 +273,12 @@ const reasons = [
 const reasonGrid = $('#reasonGrid');
 if (reasonGrid) {
   const imageFolder = reasonGrid.dataset.imageFolder || 'assets';
-  const reasonImages = Array.from({ length: 50 }, (_, index) => \`${imageFolder}/${index + 1}.jpg\`);
+  const reasonImages = Array.from({ length: 50 }, (_, index) => `${imageFolder}/${index + 1}.jpg`);
 
   reasonGrid.innerHTML = reasons.slice(0, 50)
       .map((reason, index) => {
         const image = reasonImages[index % reasonImages.length];
-        let cardHTML = \`
+        let cardHTML = `
         <article class="reason-card reveal" tabindex="0">
           <div class="reason-inner">
             <div class="reason-front">
@@ -291,10 +291,10 @@ if (reasonGrid) {
               </div>
             </div>
           </div>
-        </article>\`;
+        </article>`;
         
         if (index === 49) {
-          cardHTML += \`
+          cardHTML += `
           <article class="reason-card reveal" style="grid-column: 1 / -1; grid-row: span 2; display: flex; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.25); position: relative; z-index: 10; min-height: 550px; margin: 30px 0;">
             <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
               <source src="assets/vidio_baru.mp4" type="video/mp4">
@@ -302,7 +302,7 @@ if (reasonGrid) {
             <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 50px 15px 25px; text-align: center; color: white; font-family: 'Dancing Script', cursive; font-size: 42px; z-index: 2;">
               Our Romantic Memories ? 
             </div>
-          </article>\`;
+          </article>`;
       }
       return cardHTML;
     })
@@ -405,7 +405,7 @@ document.addEventListener('click', (e) => {
     setTimeout(() => {
       const angle = Math.random() * Math.PI * 2;
       const velocity = 40 + Math.random() * 80;
-      emoji.style.transform = \`translate(${Math.cos(angle) * velocity}px, ${Math.sin(angle) * velocity}px) rotate(${Math.random() * 360}deg) scale(0.3)\`;
+      emoji.style.transform = `translate(${Math.cos(angle) * velocity}px, ${Math.sin(angle) * velocity}px) rotate(${Math.random() * 360}deg) scale(0.3)`;
       emoji.style.opacity = '0';
     }, 10);
     
