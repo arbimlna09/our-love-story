@@ -3,7 +3,7 @@ if (!sessionStorage.getItem('isUnlocked')) {
   document.documentElement.style.overflow = 'hidden';
   const overlay = document.createElement('div');
   overlay.id = 'pinOverlay';
-  overlay.innerHTML = `
+  overlay.innerHTML = \`
     <style>
       #pinOverlay {
         position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -25,27 +25,21 @@ if (!sessionStorage.getItem('isUnlocked')) {
       .key.del { font-size: 20px; font-weight: 500; border: none; background: transparent; letter-spacing: 1px;}
       
       #giftScreen { display: none; text-align: center; animation: fadeIn 1s forwards; }
-      .gift-box { font-size: 130px; cursor: pointer; animation: bounce 2s infinite; margin: 40px; transition: 0.3s; filter: drop-shadow(0 0 20px rgba(255,255,255,0.3)); }
-      .gift-box:hover { transform: scale(1.15) rotate(5deg); }
+      .gift-box { cursor: pointer; animation: bounce 2s infinite; margin: 40px; transition: 0.3s; filter: drop-shadow(0 0 20px rgba(255,255,255,0.2)); }
+      .gift-box:hover { transform: scale(1.1) rotate(5deg); }
       
       #bouquetScreen { display: none; text-align: center; animation: fadeIn 1s forwards; }
-      .bouquet { font-size: 180px; margin: 30px; animation: popUp 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); filter: drop-shadow(0 0 30px rgba(255,105,180,0.5)); }
-      .enter-btn { margin-top: 40px; padding: 18px 50px; border-radius: 40px; border: none; 
-                   background: linear-gradient(135deg, #ff4d4d, #ff758c); color: white; font-size: 22px; font-family: 'Dancing Script', cursive; cursor: pointer; 
+      .bouquet { margin: 30px; animation: popUp 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); filter: drop-shadow(0 0 30px rgba(255,105,180,0.4)); }
+      .enter-btn { margin-top: 30px; padding: 15px 40px; border-radius: 40px; border: none; 
+                   background: linear-gradient(135deg, #ff4d4d, #ff758c); color: white; font-size: 20px; font-family: 'Dancing Script', cursive; cursor: pointer; 
                    transition: 0.3s; box-shadow: 0 10px 30px rgba(255, 77, 77, 0.4); }
       .enter-btn:hover { transform: scale(1.05) translateY(-3px); box-shadow: 0 15px 40px rgba(255, 77, 77, 0.6); }
 
       @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-      @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-30px);} 60% {transform: translateY(-15px);} }
+      @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-20px);} 60% {transform: translateY(-10px);} }
       @keyframes popUp { from { transform: scale(0) rotate(-20deg) translateY(50px); opacity: 0; } to { transform: scale(1) rotate(0) translateY(0); opacity: 1; } }
       @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-15px);} 75% {transform: translateX(15px);} }
-    
-      @keyframes float {
-        0% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-15px) rotate(2deg); }
-        100% { transform: translateY(0px) rotate(0deg); }
-      }
-
+      @keyframes float { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-15px) rotate(2deg); } 100% { transform: translateY(0px) rotate(0deg); } }
     </style>
 
     <!-- PIN Screen -->
@@ -70,23 +64,18 @@ if (!sessionStorage.getItem('isUnlocked')) {
     <div id="giftScreen">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 45px; color: #ffb3b3;">PIN Benar! ??</h2>
       <p style="font-size: 18px; color: #eee; margin-top: 10px;">Ada hadiah kecil buat kamu...</p>
-      <div class="gift-box" id="giftBox"><img src="assets/gift.png" alt="Gift" style="width: 220px; height: auto; border-radius: 20px; mix-blend-mode: normal;"></div>
-      <p style="color: #aaa; font-size: 14px; margin-top: -10px;">(Tap kadonya)</p>
-    </div>
+      <div class="gift-box" id="giftBox"><img src="assets/gift.png" alt="Gift" style="width: 220px; height: auto;"></div>
       <p style="color: #aaa; font-size: 14px; margin-top: -10px;">(Tap kadonya)</p>
     </div>
 
     <!-- Bouquet Screen -->
     <div id="bouquetScreen">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 48px; color: #ff758c;">Virtual Bouquet For You ??</h2>
-      <div class="bouquet"><img src="assets/bouquet.png" alt="Bouquet" style="width: 300px; height: auto; border-radius: 20px; mix-blend-mode: normal; animation: float 3s ease-in-out infinite;"></div>
+      <div class="bouquet"><img src="assets/bouquet.png" alt="Bouquet" style="width: 300px; height: auto; animation: float 3s ease-in-out infinite;"></div>
       <p style="font-size: 18px; color: #fff; max-width: 80%; line-height: 1.6; margin: 15px auto;">Bunga virtual ini ngga akan pernah layu, sama kayak sayang aku ke kamu. Selamat Anniversary ya, cintaku! ??</p>
       <button class="enter-btn" id="enterBtn">Buka Website</button>
     </div>
-      <p style="font-size: 18px; color: #fff; max-width: 80%; line-height: 1.6; margin: 0 auto;">Bunga virtual ini ngga akan pernah layu, sama kayak sayang aku ke kamu. Selamat Anniversary ya, cintaku! ??</p>
-      <button class="enter-btn" id="enterBtn">Buka Website</button>
-    </div>
-  `;
+  \`;
   document.documentElement.appendChild(overlay);
 
   // Logic
@@ -199,14 +188,14 @@ const $$ = (selector) => document.querySelectorAll(selector);
 const glow = $('.cursor-glow');
 document.addEventListener('mousemove', (event) => {
   if (!glow) return;
-  glow.style.left = `${event.clientX}px`;
-  glow.style.top = `${event.clientY}px`;
+  glow.style.left = \`${event.clientX}px\`;
+  glow.style.top = \`${event.clientY}px\`;
 });
 
 const musicBtn = $('#musicBtn');
 musicBtn?.addEventListener('click', () => {
   musicBtn.classList.toggle('playing');
-  musicBtn.textContent = musicBtn.classList.contains('playing') ? '♫' : '♪';
+  musicBtn.textContent = musicBtn.classList.contains('playing') ? '?' : '?';
 });
 
 const birthdayDate = new Date('2027-05-24T00:00:00').getTime();
@@ -284,12 +273,12 @@ const reasons = [
 const reasonGrid = $('#reasonGrid');
 if (reasonGrid) {
   const imageFolder = reasonGrid.dataset.imageFolder || 'assets';
-  const reasonImages = Array.from({ length: 50 }, (_, index) => `${imageFolder}/${index + 1}.jpg`);
+  const reasonImages = Array.from({ length: 50 }, (_, index) => \`${imageFolder}/${index + 1}.jpg\`);
 
   reasonGrid.innerHTML = reasons.slice(0, 50)
       .map((reason, index) => {
         const image = reasonImages[index % reasonImages.length];
-        let cardHTML = `
+        let cardHTML = \`
         <article class="reason-card reveal" tabindex="0">
           <div class="reason-inner">
             <div class="reason-front">
@@ -302,18 +291,18 @@ if (reasonGrid) {
               </div>
             </div>
           </div>
-        </article>`;
+        </article>\`;
         
         if (index === 49) {
-          cardHTML += `
+          cardHTML += \`
           <article class="reason-card reveal" style="grid-column: 1 / -1; grid-row: span 2; display: flex; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.25); position: relative; z-index: 10; min-height: 550px; margin: 30px 0;">
             <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
               <source src="assets/vidio_baru.mp4" type="video/mp4">
             </video>
             <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 50px 15px 25px; text-align: center; color: white; font-family: 'Dancing Script', cursive; font-size: 42px; z-index: 2;">
-              Our Romantic Memories 💕
+              Our Romantic Memories ? 
             </div>
-          </article>`;
+          </article>\`;
       }
       return cardHTML;
     })
@@ -329,7 +318,7 @@ const letterText = `Hai Miwmiw sayang...
 Jujur, ketemu sama kamu itu hal paling indah yang pernah terjadi di hidupku. Cuma dengan ada di dekatmu, atau sekadar liat kamu senyum aja, duniaku rasanya jadi jauh lebih tenang dan bahagia.
 Di hari anniversary kita yang ke-2 ini, aku cuma mau kamu tau kalau aku sayang banget sama kamu. Bukan cuma hari ini aja, tapi setiap detik, setiap hari. Dua tahun bareng kamu rasanya luar biasa banget, dan aku selalu bersyukur kamu yang nemenin hari-hariku.
 Harapanku buat kita... semoga kita selalu bisa sama-sama terus, saling ngerti, dan nggak pernah capek buat saling jatuh cinta lagi dan lagi. Semoga ke depannya kita selalu nemuin banyak kebahagiaan, pagi yang tenang, dan momen-momen kecil yang bikin kita senyum berdua.
-Selamat Anniversary yang ke-2 ya, sayang. Kamu itu bener-bener keajaiban buat aku, dan kamu pantes dapet semua cinta di dunia ini di setiap langkah cerita kita nanti. I Love You so much 🫶`;
+Selamat Anniversary yang ke-2 ya, sayang. Kamu itu bener-bener keajaiban buat aku, dan kamu pantes dapet semua cinta di dunia ini di setiap langkah cerita kita nanti. I Love You so much ??`;
 let hasTypedLetter = false;
 
 envelope?.addEventListener('click', () => {
@@ -359,23 +348,23 @@ cutCakeBtn?.addEventListener('click', async () => {
   cakeAnimationStarted = true;
   cutCakeBtn.disabled = true;
 
-  cakeStageText.textContent = 'blowing the candles... 🌬️';
+  cakeStageText.textContent = 'blowing the candles... ?????';
   cutCakeBtn.textContent = 'Blowing Candles...';
   cake.classList.add('blow');
   await wait(1500);
 
-  cakeStageText.textContent = ' cake is cutting 🔪';
+  cakeStageText.textContent = ' cake is cutting ??';
   cutCakeBtn.textContent = '';
   cake.classList.add('knife-in');
   await wait(1200);
 
-  cakeStageText.textContent = ' into a slice... 🍰';
+  cakeStageText.textContent = ' into a slice... ??';
   cutCakeBtn.textContent = 'Cutting Slice...';
   cake.classList.add('sliced');
   await wait(900);
 
-  cakeStageText.textContent = 'first slice for my Miwmiw 🎉';
-  cutCakeBtn.textContent = 'Cake Cut 🎉';
+  cakeStageText.textContent = 'first slice for my Miwmiw ??';
+  cutCakeBtn.textContent = 'Cake Cut ??';
 
   if (typeof confetti === 'function') {
     confetti({ particleCount: 280, spread: 115, origin: { y: 0.62 } });
@@ -394,7 +383,7 @@ document.addEventListener('click', (e) => {
 
 
 // Funny & Romantic Click Burst Effect
-const burstEmojis = ['??', '??', '??', '??', '??', '??', '??', '??', '?'];
+const burstEmojis = ['??', '??', '??', '??', '??', '??', '??', '?', '??'];
 document.addEventListener('click', (e) => {
   // Don't burst on the PIN screen input to avoid blocking the view
   if (e.target.id === 'pinInput') return;
@@ -416,11 +405,10 @@ document.addEventListener('click', (e) => {
     setTimeout(() => {
       const angle = Math.random() * Math.PI * 2;
       const velocity = 40 + Math.random() * 80;
-      emoji.style.transform = `translate(${Math.cos(angle) * velocity}px, ${Math.sin(angle) * velocity}px) rotate(${Math.random() * 360}deg) scale(0.3)`;
+      emoji.style.transform = \`translate(${Math.cos(angle) * velocity}px, ${Math.sin(angle) * velocity}px) rotate(${Math.random() * 360}deg) scale(0.3)\`;
       emoji.style.opacity = '0';
     }, 10);
     
     setTimeout(() => emoji.remove(), 800);
   }
 });
-
