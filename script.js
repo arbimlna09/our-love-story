@@ -135,6 +135,20 @@ if (!sessionStorage.getItem('isUnlocked')) {
 
   document.getElementById('enterBtn').addEventListener('click', () => {
     sessionStorage.setItem('isUnlocked', 'true');
+    sessionStorage.setItem('musicPlaying', 'true');
+    
+    // Play from 01:21
+    window.bgMusic = new Audio('assets/bg_music.mp3');
+    window.bgMusic.loop = true;
+    window.bgMusic.currentTime = 81;
+    window.bgMusic.play().catch(e => console.log('Audio error:', e));
+    
+    setInterval(() => {
+        if (!window.bgMusic.paused) {
+            sessionStorage.setItem('musicTime', window.bgMusic.currentTime);
+        }
+    }, 500);
+
     overlay.style.opacity = '0';
     overlay.style.transition = 'opacity 0.8s ease';
     setTimeout(() => {
@@ -142,6 +156,31 @@ if (!sessionStorage.getItem('isUnlocked')) {
       document.documentElement.style.overflow = 'auto';
     }, 800);
   });
+}
+
+} else {
+  // Already unlocked, resume music across pages
+  if (sessionStorage.getItem('musicPlaying') === 'true') {
+    window.bgMusic = new Audio('assets/bg_music.mp3');
+    window.bgMusic.loop = true;
+    const savedTime = parseFloat(sessionStorage.getItem('musicTime')) || 81;
+    window.bgMusic.currentTime = savedTime;
+    
+    window.bgMusic.play().catch(e => {
+        console.log('Autoplay blocked on navigation, waiting for interaction');
+        const playOnInteract = () => {
+            window.bgMusic.play();
+            document.removeEventListener('click', playOnInteract);
+        };
+        document.addEventListener('click', playOnInteract);
+    });
+
+    setInterval(() => {
+        if (!window.bgMusic.paused) {
+            sessionStorage.setItem('musicTime', window.bgMusic.currentTime);
+        }
+    }, 500);
+  }
 }
 
 const $ = (selector) => document.querySelector(selector);
