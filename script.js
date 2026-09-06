@@ -39,6 +39,13 @@ if (!sessionStorage.getItem('isUnlocked')) {
       @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-30px);} 60% {transform: translateY(-15px);} }
       @keyframes popUp { from { transform: scale(0) rotate(-20deg) translateY(50px); opacity: 0; } to { transform: scale(1) rotate(0) translateY(0); opacity: 1; } }
       @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-15px);} 75% {transform: translateX(15px);} }
+    
+      @keyframes float {
+        0% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-15px) rotate(2deg); }
+        100% { transform: translateY(0px) rotate(0deg); }
+      }
+
     </style>
 
     <!-- PIN Screen -->
@@ -70,7 +77,7 @@ if (!sessionStorage.getItem('isUnlocked')) {
     <!-- Bouquet Screen -->
     <div id="bouquetScreen">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 48px; color: #ff758c;">Virtual Bouquet For You ??</h2>
-      <div class="bouquet">??</div>
+      <div class="bouquet"><img src="assets/bouquet.png" alt="Bouquet" style="width: 250px; height: auto; animation: float 3s ease-in-out infinite;"></div>
       <p style="font-size: 18px; color: #fff; max-width: 80%; line-height: 1.6; margin: 0 auto;">Bunga virtual ini ngga akan pernah layu, sama kayak sayang aku ke kamu. Selamat Anniversary ya, cintaku! ??</p>
       <button class="enter-btn" id="enterBtn">Buka Website</button>
     </div>
@@ -79,7 +86,7 @@ if (!sessionStorage.getItem('isUnlocked')) {
 
   // Logic
   let enteredPin = "";
-  const correctPin = "0711";
+  const correctPin = "0709";
   const dots = document.querySelectorAll('.dot');
   const msg = document.getElementById('pinMsg');
   const pinScreen = document.getElementById('pinScreen');
@@ -222,7 +229,7 @@ const reasons = [
   "Your laugh is so contagious I can't help but join in ??",
   "The most random person on earth, but you are my favorite ??",
   "You snore louder than a tractor but I still love you ??",
-  "More talkative than a radio host when you are excited ???",
+  "More talkative than a radio host when you are excited ??",
   "The absolute best at making me blush out of nowhere ??",
   "Pretends not to care but is actually the softest softie ??",
   "Extremely clingy when you miss me and I love it ??",
@@ -230,16 +237,16 @@ const reasons = [
   "Can literally fall asleep anywhere, anytime ??",
   "Your smile is so sweet it might give me diabetes ??",
   "So weird sometimes but you are my weirdo ??",
-  "Replies to texts like you live in a different time zone ??",
+  "Replies to texts like you live in a different time zone ?",
   "The fiercest tamer of my heart ??",
   "Always looking for a playful fight ??",
-  "Cannot sit still for even a minute ??",
+  "Cannot sit still for even a minute ?????",
   "Oscar winner for best dramatic performance ??",
   "Gets jealous so easily but it is so cute ??",
   "Your random behavior is truly out of this world ??",
   "My favorite annoying person in the entire universe ??",
   "Professional 2 AM overthinker ??",
-  "Always forgets where you put your own stuff ???",
+  "Always forgets where you put your own stuff ??????",
   "You look so funny when you try to be serious ??",
   "The master of making excuses when caught ??",
   "Cries like a baby when watching sad movies ??",
@@ -250,7 +257,7 @@ const reasons = [
   "Your laugh is so contagious I can't help but join in ??",
   "The most random person on earth, but you are my favorite ??",
   "You snore louder than a tractor but I still love you ??",
-  "More talkative than a radio host when you are excited ???",
+  "More talkative than a radio host when you are excited ??",
   "The absolute best at making me blush out of nowhere ??",
   "Pretends not to care but is actually the softest softie ??",
   "Extremely clingy when you miss me and I love it ??",
@@ -258,65 +265,15 @@ const reasons = [
   "Can literally fall asleep anywhere, anytime ??",
   "Your smile is so sweet it might give me diabetes ??",
   "So weird sometimes but you are my weirdo ??",
-  "Replies to texts like you live in a different time zone ??",
+  "Replies to texts like you live in a different time zone ?",
   "The fiercest tamer of my heart ??",
   "Always looking for a playful fight ??",
-  "Cannot sit still for even a minute ??",
+  "Cannot sit still for even a minute ?????",
   "Oscar winner for best dramatic performance ??",
   "Gets jealous so easily but it is so cute ??",
   "Your random behavior is truly out of this world ??",
   "My favorite annoying person in the entire universe ??",
-  "Professional 2 AM overthinker ??",
-  "Always forgets where you put your own stuff ???",
-  "You look so funny when you try to be serious ??",
-  "The master of making excuses when caught ??",
-  "Cries like a baby when watching sad movies ??",
-  "Always gets ice cream all over your face ??",
-  "Acts cool when complimented but is actually so happy ??",
-  "When you pout, you look like an angry little duck ??",
-  "Hobby: Testing my patience but I still miss you ??",
-  "Your laugh is so contagious I can't help but join in ??",
-  "The most random person on earth, but you are my favorite ??",
-  "You snore louder than a tractor but I still love you ??",
-  "More talkative than a radio host when you are excited ???",
-  "The absolute best at making me blush out of nowhere ??",
-  "Pretends not to care but is actually the softest softie ??",
-  "Extremely clingy when you miss me and I love it ??",
-  "Turns into a fierce dinosaur when hungry ??",
-  "Can literally fall asleep anywhere, anytime ??",
-  "Your smile is so sweet it might give me diabetes ??",
-  "So weird sometimes but you are my weirdo ??",
-  "Replies to texts like you live in a different time zone ??",
-  "The fiercest tamer of my heart ??",
-  "Always looking for a playful fight ??",
-  "Cannot sit still for even a minute ??",
-  "Oscar winner for best dramatic performance ??",
-  "Gets jealous so easily but it is so cute ??",
-  "Your random behavior is truly out of this world ??",
-  "My favorite annoying person in the entire universe ??",
-  "Professional 2 AM overthinker ??",
-  "Always forgets where you put your own stuff ???",
-  "You look so funny when you try to be serious ??",
-  "The master of making excuses when caught ??",
-  "Cries like a baby when watching sad movies ??",
-  "Always gets ice cream all over your face ??",
-  "Acts cool when complimented but is actually so happy ??",
-  "When you pout, you look like an angry little duck ??",
-  "Hobby: Testing my patience but I still miss you ??",
-  "Your laugh is so contagious I can't help but join in ??",
-  "The most random person on earth, but you are my favorite ??",
-  "You snore louder than a tractor but I still love you ??",
-  "More talkative than a radio host when you are excited ???",
-  "The absolute best at making me blush out of nowhere ??",
-  "Pretends not to care but is actually the softest softie ??",
-  "Extremely clingy when you miss me and I love it ??",
-  "Turns into a fierce dinosaur when hungry ??",
-  "Can literally fall asleep anywhere, anytime ??",
-  "Your smile is so sweet it might give me diabetes ??",
-  "So weird sometimes but you are my weirdo ??",
-  "Replies to texts like you live in a different time zone ??",
-  "The fiercest tamer of my heart ??",
-  "Always looking for a playful fight ??",
+  "Professional 2 AM overthinker ??"
 ];
 
 const reasonGrid = $('#reasonGrid');
@@ -325,21 +282,24 @@ if (reasonGrid) {
   const reasonImages = Array.from({ length: 50 }, (_, index) => `${imageFolder}/${index + 1}.jpg`);
 
   reasonGrid.innerHTML = reasons.slice(0, 50)
-    .map((reason, index) => {
-      const image = reasonImages[index % reasonImages.length];
-      let cardHTML = `
-      <article class="reason-card reveal" tabindex="0">
-        <div class="reason-inner">
-          <div class="reason-front">
-            <h3>${index + 1}</h3>
-            <p>tap to open 🤍</p>
+      .map((reason, index) => {
+        const image = reasonImages[index % reasonImages.length];
+        let cardHTML = `
+        <article class="reason-card reveal" tabindex="0">
+          <div class="reason-inner">
+            <div class="reason-front">
+              <h3>${index + 1}</h3>
+              <p>tap to open ??</p>
+            </div>
+            <div class="reason-back" style="background-image: url('${image}'); background-size: cover; background-position: center;">
+              <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 20px; color: white; text-align: center; border-radius: 0 0 16px 16px;">
+                <p style="margin: 0; font-size: 14px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">${reason}</p>
+              </div>
+            </div>
           </div>
-          <div class="reason-back" style="background-image: url('${image}'); background-size: cover; background-position: center;">
-          </div>
-        </div>
-      </article>`;
-      
-      if (index === 49) {
+        </article>`;
+        
+        if (index === 49) {
           cardHTML += `
           <article class="reason-card reveal" style="grid-column: 1 / -1; grid-row: span 2; display: flex; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.25); position: relative; z-index: 10; min-height: 550px; margin: 30px 0;">
             <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
