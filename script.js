@@ -156,8 +156,6 @@ if (!sessionStorage.getItem('isUnlocked')) {
       document.documentElement.style.overflow = 'auto';
     }, 800);
   });
-}
-
 } else {
   // Already unlocked, resume music across pages
   if (sessionStorage.getItem('musicPlaying') === 'true') {
@@ -460,3 +458,4 @@ document.addEventListener('click', (e) => {
     setTimeout(() => emoji.remove(), 800);
   }
 });
+
