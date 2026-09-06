@@ -77,7 +77,7 @@ if (!sessionStorage.getItem('isUnlocked')) {
     <!-- Bouquet Screen -->
     <div id="bouquetScreen">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 48px; color: #ff758c;">Virtual Bouquet For You ??</h2>
-      <div class="bouquet"><img src="assets/bouquet.png" alt="Bouquet" style="width: 250px; height: auto; animation: float 3s ease-in-out infinite;"></div>
+      <div class="bouquet"><img src="assets/bouquet.jpg" alt="Bouquet" style="width: 250px; height: auto; animation: float 3s ease-in-out infinite;"></div>
       <p style="font-size: 18px; color: #fff; max-width: 80%; line-height: 1.6; margin: 0 auto;">Bunga virtual ini ngga akan pernah layu, sama kayak sayang aku ke kamu. Selamat Anniversary ya, cintaku! ??</p>
       <button class="enter-btn" id="enterBtn">Buka Website</button>
     </div>
