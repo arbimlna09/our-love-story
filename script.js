@@ -177,11 +177,24 @@ musicBtn?.addEventListener('click', () => {
 });
 
 const birthdayDate = new Date('2026-09-07T00:00:00').getTime();
+let countdownFinished = false;
 function updateCountdown() {
   const countdown = $('#countdown');
   if (!countdown) return;
 
   const difference = Math.max(birthdayDate - Date.now(), 0);
+  
+  if (difference === 0 && !countdownFinished) {
+      countdownFinished = true;
+      countdown.innerHTML = '<h3 style="font-family: \'Dancing Script\', cursive; font-size: 38px; color: #ff4d4d; margin: 20px 0; text-align: center;">Happy Anniversary Sayang! ????</h3>';
+      if (typeof confetti === 'function') {
+          confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+      }
+      return;
+  }
+  
+  if (countdownFinished) return;
+
   const days = Math.floor(difference / 86400000);
   const hours = Math.floor((difference % 86400000) / 3600000);
   const minutes = Math.floor((difference % 3600000) / 60000);
