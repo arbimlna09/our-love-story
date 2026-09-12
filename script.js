@@ -64,7 +64,7 @@ if (!sessionStorage.getItem("isUnlocked")) {
 
   // Logic
   let enteredPin = "";
-  const correctPin = "0709";
+  const correctPin = "0907";
   const dots = document.querySelectorAll(".dot");
   const msg = document.getElementById("pinMsg");
   const pinScreen = document.getElementById("pinScreen");
